@@ -2,6 +2,8 @@ package com.bielma.arbosch.WebService;
 
 import android.os.AsyncTask;
 
+import java.net.Authenticator;
+import java.net.PasswordAuthentication;
 import java.net.URL;
 
 import retrofit2.Retrofit;
@@ -18,21 +20,33 @@ public class WebService {
             +"xXpneXyiSRVqaThevUUv3SoD8oZ4X4w05iZ5WpeAg33es6noOE0ktxEGklVUKBhZP7B62SeIWIpa8LxQ56qH0gi3ULcw" +
             "W4X1Ye8gfsWadn4FVk%2FEDw53iKTf%2BOa1QiMNwqp%2F%2BQ0Bab7w2wvl9IVhDj96daFlHEOQ7OTEEosIABAsYsJALsYHfU8WkPYP%2F4lK%2B4myLZl";
 
+
+
     public WebService(){
 
     }
 
     private void getDatos(){
-
+        Authenticator.setDefault(new Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(USER, PASS.toCharArray());
+            }
+        });
 
     }
 
-    private class GetDatos extends AsyncTask<Void,Void,Void>{
+    public class Service extends AsyncTask<Void, Void, Void>{
+
         @Override
         protected Void doInBackground(Void... voids) {
             return null;
         }
 
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+
+        }
     }
 
 

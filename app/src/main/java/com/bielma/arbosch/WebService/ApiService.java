@@ -7,10 +7,12 @@ import retrofit2.http.Query;
 
 public interface ApiService {
 
+
     @POST("login")
     Call<WebService> getTokens(
             @Query("logonId") String username,
             @Query("logonPassword") String password
     );
+
 
 }
