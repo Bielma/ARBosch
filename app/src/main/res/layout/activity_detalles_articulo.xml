@@ -65,12 +65,13 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/btnShowAr"
         android:layout_width="65dp"
         android:layout_height="67dp"
         android:layout_marginTop="36dp"
         android:layout_marginEnd="16dp"
         android:src="@drawable/arcore_logo"
+        android:onClick="showAR"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

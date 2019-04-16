@@ -12,31 +12,20 @@ import com.bielma.arbosch.WebService.WebService;
 
 import retrofit2.Call;
 
-public class MainActivity extends AppCompatActivity implements ApiService {
-
+public class MainActivity extends AppCompatActivity  {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        irAProductos();
-
+       irAProductos();
+        WebService webService = new WebService();
+        webService.getTokens();
+       // Log.d("String", aber);
     }
 
     public void irAProductos(){
         Intent i = new Intent(this, Productos.class);
         startActivity(i);
-    }
-
-    public void bajarInformacion(){
-        getTokens("ZV^M4Y*Wb#%j9tpgZ%Rlvy2TjiyZ","%kpjbI4c3@jTu!U3QB$dKWKa5w9$1zd%R7lg@CvKTLaV%vV1Vi");
-    }
-
-
-    @Override
-    public Call<WebService> getTokens(String username, String password) {
-
-        Log.d("token", "Recibi algo :v ");
-        return null;
     }
 }

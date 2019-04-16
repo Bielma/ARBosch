@@ -1,54 +1,90 @@
 package com.bielma.arbosch.WebService;
 
-import android.os.AsyncTask;
-
-import java.net.Authenticator;
-import java.net.PasswordAuthentication;
-import java.net.URL;
-
+import android.util.Log;
+import com.bielma.arbosch.Modelos.Credenciales;
+import com.bielma.arbosch.Modelos.Producto;
+import com.bielma.arbosch.Modelos.Tokens;
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class WebService {
-    static final String urlPost = "https://esb.boschenlinea.com/api/login";
-    static final String urlGet  =  "https://esb.boschenlinea.com/api/productview/{partNumber}";
-    static final String WCTrustedToken = "272032%2C1QkfiPo8oQ1iHA%2BV%2BxSoKTq3hcdjfM25%2BHca4weFev0%3D";
+    static final String API_BASE_URL = "https://esb.boschenlinea.com/api/";
     static final String USER = "ZV^M4Y*Wb#%j9tpgZ%Rlvy2TjiyZ";
     static final String PASS = "%kpjbI4c3@jTu!U3QB$dKWKa5w9$1zd%R7lg@CvKTLaV%vV1Vi";
     static final String id = "thetonybl@gmail.com";  //Usuario para acceder a boschenlinea
     static final String pass = "pronatural";            //contraseña para acceder a boschenlinea
-    static final String WCToken = "272032%2C%2FASh5yUfxNasr9B1AHWAz6yEsWpp56kQTib%2BfPBIyk7xMakepfllaad2Z"
-            +"xXpneXyiSRVqaThevUUv3SoD8oZ4X4w05iZ5WpeAg33es6noOE0ktxEGklVUKBhZP7B62SeIWIpa8LxQ56qH0gi3ULcw" +
-            "W4X1Ye8gfsWadn4FVk%2FEDw53iKTf%2BOa1QiMNwqp%2F%2BQ0Bab7w2wvl9IVhDj96daFlHEOQ7OTEEosIABAsYsJALsYHfU8WkPYP%2F4lK%2B4myLZl";
+    static final String Authorization = "Basic" +
+            "WlZeTTRZKldiIyVqOXRwZ1olUmx2eTJUaml5Wjola3BqYkk0YzNAalR1IVUzUUIkZEtXS2E1dzkkMXp" +
+            "kJVI3bGdAQ3ZLVExhViV2VjFWaQ==";
+    static final String ContentType = "application/json";
 
 
 
-    public WebService(){
+    public void getTokens()
+    {
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
-    }
+        OkHttpClient client = new OkHttpClient.Builder()
+                .addInterceptor(new AuthInterceptor(USER, PASS))
+                .build();
+        Retrofit retrofit = new Retrofit.Builder()
+            .baseUrl(API_BASE_URL)
+            .client(client)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build();
+        final ApiService login = retrofit.create(ApiService.class);
+        Call<Tokens> call = login.getTokens(Authorization, ContentType, new Credenciales(id, pass));
+        call.enqueue(new Callback<Tokens>() {
+            @Override
+            public void onResponse(Call<Tokens> call, Response<Tokens> response)
+            {
+                if(response.isSuccessful()){
+                    //ApiService get = retro.create(ApiService.class);
+                    Call<Producto> call2 = login.getProductos("F0132050AA",Authorization, response.body().getWCTrustedToken(), response.body().getWCToken(),ContentType);
+                    call2.enqueue(new Callback<Producto>() {
+                        @Override
+                        public void onResponse(Call<Producto> call, Response<Producto> response) {
+                            Log.d("Retro", "Respuesta: ");
+                            Log.d("Retro",response.toString());
+                            Log.d("Retro",response.body().toString());
+                           if(response.isSuccessful()){
+                               Log.d("Retro", "Respuesta: 20");
+                               //Log.d("Retro",response.body().getUniqueID());
+                               Log.d("Retro",response.body().toString());
+                               Log.d("Retro",response.toString());
+                           }
+                        }
+                        @Override
+                        public void onFailure(Call<Producto> call, Throwable t) {
+                            Log.d("Retro", "Error we:");
+                            Log.d("Retro", t.getLocalizedMessage());
+                            //Log.d("Retro", call.toString());
 
-    private void getDatos(){
-        Authenticator.setDefault(new Authenticator() {
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(USER, PASS.toCharArray());
+
+                        }
+                    });
+                }
+            }
+            @Override
+            public void onFailure(Call<Tokens> call, Throwable t) {
+                Log.d("Retro", t.getLocalizedMessage());
             }
         });
 
     }
 
-    public class Service extends AsyncTask<Void, Void, Void>{
+       public void getPosts() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(API_BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        ApiService getService = retrofit.create(ApiService.class);
 
-        @Override
-        protected Void doInBackground(Void... voids) {
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-
-        }
     }
-
-
-
 }
