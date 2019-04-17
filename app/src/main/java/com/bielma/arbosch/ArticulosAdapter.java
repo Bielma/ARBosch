@@ -13,6 +13,11 @@ import com.bielma.arbosch.Modelos.Producto;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Adaptador para recyclerView que muestra los productos.
+ * Cuando se instancia recibe una lista de Productos.
+ * Creara una celda por cada elemento de la lista.
+ */
 public class ArticulosAdapter extends RecyclerView.Adapter<ArticulosAdapter.ArticulosViewHolder> {
     private List<Producto> productos;
     private ItemClickListener itemClickListener;

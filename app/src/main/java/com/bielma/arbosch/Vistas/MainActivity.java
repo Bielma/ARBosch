@@ -30,6 +30,9 @@ public class MainActivity extends AppCompatActivity  {
 
     }
 
+    /**
+     * Inserta el registro del item "F0132050AA"
+     */
     private void insertarRegistro(){
         ProductosDBHelper helper = new ProductosDBHelper(this);
         Producto dremel = new Producto();

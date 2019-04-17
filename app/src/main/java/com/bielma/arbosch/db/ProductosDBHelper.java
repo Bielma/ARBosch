@@ -10,6 +10,9 @@ import com.bielma.arbosch.Modelos.Producto;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Con esta clase se hacen las operaciones sobre la base de datos.
+ */
 public class ProductosDBHelper {
     private ProductosDB productosDB;
 
@@ -23,6 +26,11 @@ public class ProductosDBHelper {
         db = productosDB.getWritableDatabase();
 
     }
+
+    /**
+     * Inserta un Producto en la base de datos.
+     * @param producto
+     */
     public void insertarProducto(Producto producto){
         ContentValues values = new ContentValues();
         values.put("id",producto.getUniqueID());

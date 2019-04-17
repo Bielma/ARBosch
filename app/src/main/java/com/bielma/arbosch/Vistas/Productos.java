@@ -15,6 +15,12 @@ import com.bielma.arbosch.db.ProductosDBHelper;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Vista con una lista de productos, sacados de la base de datos.
+ * Primero se obtienen los productos, despues se instancia un adaptador
+ * pasandole una lista de productos.
+ */
+
 public class Productos extends AppCompatActivity implements ArticulosAdapter.ItemClickListener{
     private List<Producto> productos;      //Lista de Producto
     private ArticulosAdapter adapter;           //Adaptador para el recyclerview
@@ -37,7 +43,11 @@ public class Productos extends AppCompatActivity implements ArticulosAdapter.Ite
 
     }
 
-
+    /**
+     * Se llama cuando se hace click sobre un item del recyclerView
+     * @param view
+     * @param Position
+     */
     @Override
     public void onItemClick(View view, int Position) {
         mostrarDetalles(Position);

@@ -11,7 +11,10 @@ import android.widget.Toast;
 import com.bielma.arbosch.Modelos.Producto;
 import com.bielma.arbosch.R;
 import com.bielma.arbosch.db.ProductosDBHelper;
-
+/*
+    Este activity busca el registro seleccionado y,
+    luego muestra los datos.
+ */
 public class DetallesArticulo extends AppCompatActivity {
 
     private TextView nombre;
@@ -30,6 +33,7 @@ public class DetallesArticulo extends AppCompatActivity {
     }
 
     /**
+     * Busca un registro en la BD y
      * Coloca los datos en los textViews
      */
     private void setData() {

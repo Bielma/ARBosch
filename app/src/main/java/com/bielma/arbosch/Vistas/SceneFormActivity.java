@@ -18,6 +18,9 @@ import com.google.ar.sceneform.ux.ArFragment;
 import com.google.ar.sceneform.ux.BaseArFragment;
 import com.google.ar.sceneform.ux.TransformableNode;
 
+/**
+ * Activity para la vista AR.
+ */
 public class SceneFormActivity extends AppCompatActivity {
 
     private static final String TAG = SceneFormActivity.class.getSimpleName();
