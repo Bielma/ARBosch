@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bielma.arbosch.Modelos.Producto;
 import com.bielma.arbosch.R;
@@ -67,5 +68,8 @@ public class DetallesArticulo extends AppCompatActivity {
     public void showAR(View view){
         Intent ar = new Intent(this, SceneFormActivity.class);
         startActivity(ar);
+    }
+    public void showToast(View view){
+        Toast.makeText(this, "En desarollo...", Toast.LENGTH_LONG).show();
     }
 }
