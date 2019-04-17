@@ -7,12 +7,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.bielma.arbosch.ArticulosAdapter;
 import com.bielma.arbosch.Modelos.Producto;
 import com.bielma.arbosch.R;
 import com.bielma.arbosch.db.ProductosDBHelper;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

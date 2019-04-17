@@ -1,4 +1,4 @@
-package com.bielma.arbosch;
+package com.bielma.arbosch.Vistas;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -9,8 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bielma.arbosch.Modelos.Producto;
+import com.bielma.arbosch.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
