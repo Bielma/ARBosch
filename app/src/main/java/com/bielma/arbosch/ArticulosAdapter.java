@@ -11,11 +11,12 @@ import android.widget.TextView;
 import com.bielma.arbosch.Modelos.Producto;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ArticulosAdapter extends RecyclerView.Adapter<ArticulosAdapter.ArticulosViewHolder> {
-    private ArrayList<Producto> productos;
+    private List<Producto> productos;
     private ItemClickListener itemClickListener;
-    public ArticulosAdapter(ArrayList<Producto> productos){
+    public ArticulosAdapter(List<Producto> productos){
         this.productos = productos;
     }
 
@@ -29,14 +30,15 @@ public class ArticulosAdapter extends RecyclerView.Adapter<ArticulosAdapter.Arti
 
     @Override
     public void onBindViewHolder(@NonNull ArticulosViewHolder articulosViewHolder, int i) {
-        articulosViewHolder.nombre.setText("Hola");
-        articulosViewHolder.descripcion.setText("Pinche putita");
+        articulosViewHolder.nombre.setText(productos.get(i).getName());
+        articulosViewHolder.descripcion.setText(productos.get(i).getShortDescription());
+        articulosViewHolder.img.setImageResource(Integer.valueOf(productos.get(i).getThumbnail()));
     }
 
     @Override
     public int getItemCount() {
-        //return productos.size();
-        return 1;
+        return productos.size();
+
     }
     public void setClickClickListener(ItemClickListener itemClickListener){
         this.itemClickListener = itemClickListener;
@@ -48,12 +50,14 @@ public class ArticulosAdapter extends RecyclerView.Adapter<ArticulosAdapter.Arti
         private ImageView img;
         private TextView nombre;
         private TextView descripcion;
-    //  private TextView precio;//
+        private TextView id;
+
         public ArticulosViewHolder(@NonNull View itemView) {
             super(itemView);
             img = (ImageView)itemView.findViewById(R.id.img);
             nombre = itemView.findViewById(R.id.titulo);
             descripcion = (TextView)itemView.findViewById(R.id.des);
+            id = (TextView)itemView.findViewById(R.id.lbl_id);
             itemView.setOnClickListener(this);
         }
 

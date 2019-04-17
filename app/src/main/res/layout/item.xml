@@ -44,4 +44,14 @@
         app:layout_constraintTop_toBottomOf="@+id/img"
         tools:layout_editor_absoluteX="8dp" />
 
+    <TextView
+        android:id="@+id/lbID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:visibility="invisible"
+        app:layout_constraintStart_toEndOf="@+id/titulo"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </android.support.constraint.ConstraintLayout>

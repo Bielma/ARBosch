@@ -19,9 +19,8 @@
           application only being visible in the Google Play Store on devices that support
           ARCore. -->
         <meta-data android:name="com.google.ar.core" android:value="required" />
-
-
-        <activity android:name=".Vistas.DetallesArticulo"></activity>
+        <activity android:name=".Vistas.DetallesArticulo"
+            android:parentActivityName=".Vistas.Productos"></activity>
         <activity android:name=".Vistas.Productos"></activity>
         <activity
             android:name=".Vistas.MainActivity"

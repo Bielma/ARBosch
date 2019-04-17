@@ -10,34 +10,46 @@ import android.view.View;
 import com.bielma.arbosch.ArticulosAdapter;
 import com.bielma.arbosch.Modelos.Producto;
 import com.bielma.arbosch.R;
+import com.bielma.arbosch.db.ProductosDBHelper;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Productos extends AppCompatActivity implements ArticulosAdapter.ItemClickListener{
-    ArrayList<Producto> productos;      //Lista
-    ArticulosAdapter adapter;           //Adaptador para el recyclerview
-    RecyclerView lista_productos;       //Recycler view que mostrara cada item
+    private List<Producto> productos;      //Lista de Producto
+    private ArticulosAdapter adapter;           //Adaptador para el recyclerview
+    private RecyclerView lista_productos;       //Recycler view que mostrará todos los items
+    private ProductosDBHelper helper;           //Instancia de ProductosDBHelper para acceder a la
+                                                //base de datos.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_productos);
         lista_productos = (RecyclerView)findViewById(R.id.lista_articulos);
         lista_productos.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL, false ));
-        productos = new ArrayList<>();
-        productos.add(new Producto());
+        helper = new ProductosDBHelper(this);
+        productos = helper.getProductos();
+       // productos = new ArrayList<>();
+        //productos.add(new Producto());
         adapter = new ArticulosAdapter(productos);
-
         adapter.setClickClickListener(this);
         lista_productos.setAdapter(adapter);
 
     }
 
+
     @Override
     public void onItemClick(View view, int Position) {
-        mostrarDetalles();
+        mostrarDetalles(Position);
     }
-    public void mostrarDetalles(){
+
+    /**
+     * Abre un activity donde se muestran los datos del producto.
+     * @param p
+     */
+    public void mostrarDetalles(int p){
         Intent detalles = new Intent(this, DetallesArticulo.class);
+        detalles.putExtra("id", productos.get(p).getUniqueID());
         startActivity(detalles);
     }
 }
